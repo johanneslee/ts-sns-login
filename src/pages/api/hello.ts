@@ -1,13 +1,16 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+export default function FacebookLogin() {
+  FB.init({
+    appId: '332308867509793',
+    version: 'v16.0',
+    status: true,
+    cookie: true,
+    xfbml: true,
+    autoLogAppEvents: false
+  });
 
-type Data = {
-  name: string
-}
-
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
+  FB.getLoginStatus(function(response: fb.StatusResponse) {
+    console.log(response);
+    console.log(response.status);
+    console.log(response.authResponse.accessToken);
+  });
 }
