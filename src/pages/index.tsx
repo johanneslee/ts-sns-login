@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
-
 const facebookOnLoad = () => {
   FB.init({
     appId: '332308867509793',
@@ -35,7 +34,10 @@ const facebookHandler = () => {
   });
 };
 const naverHandler = () => {
-  //NaverLogin();
+  const client_id = 'UAd5kukMklI9ji12Bmhn';
+  const redirectURI = encodeURI('https://ts-sns-login.vercel.app/api/naver');
+  const state = 'RANDOM_STATE';
+  location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
 };
 const kakaoHandler = () => {
   //Kakaoogin();
@@ -102,6 +104,7 @@ export default function Home() {
         </button>
 
         <button
+          onClick={naverHandler}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
