@@ -1,10 +1,38 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
-import FacebookLogin from './api/hello';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
+
+const facebookOnLoad = () => {
+  FB.init({
+    appId: '332308867509793',
+    version: 'v16.0',
+    status: true,
+    cookie: true,
+    xfbml: true,
+    autoLogAppEvents: false
+  });
+}
 const facebookHandler = () => {
-  FacebookLogin();
+  FB.getLoginStatus((response: fb.StatusResponse) => {
+    switch (response.status) {
+      case 'connected':
+        alert(`You're already connected to our Website.`);
+        break;
+      case 'not_authorized':
+        alert(`You're logged in facebook but not connected to our Website yet.`);
+        break;
+      case 'unknown':
+        alert(`You're not logged in facebook yet.`);
+        FB.login(function(response){
+          facebookHandler();
+        });
+        break;
+      default:
+        break;
+    }
+  });
 };
 const naverHandler = () => {
   //NaverLogin();
@@ -115,6 +143,13 @@ export default function Home() {
           </p>
         </button>
       </div>
+
+      <Script
+        async
+        defer
+        src="https://connect.facebook.net/en_US/sdk.js"
+        onLoad={facebookOnLoad}
+      />
     </main>
   )
 }

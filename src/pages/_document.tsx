@@ -5,7 +5,6 @@ export default function Document() {
     <Html lang="en">
       <Head>
 				<title>Sns login samples</title>
-        <script src="https://connect.facebook.net/en_US/sdk.js"></script>
       </Head>
       <body>
         <Main />
