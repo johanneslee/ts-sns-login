@@ -18,11 +18,11 @@ const naver = (req: NextApiRequest, res: NextApiResponse) => {
   const response = fetch(api_url, {
     method: "GET",
     headers: {
-      'X-Naver-Client-Id':client_id,
+      'X-Naver-Client-Id': client_id,
       'X-Naver-Client-Secret': client_secret
     },
   }).catch((e) => console.log(e));
   
-  console.log(response);
+  res.status(200).json(response);
 }
 export default naver;
