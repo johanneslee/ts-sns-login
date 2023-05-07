@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
-const facebookOnLoad = () => {
+const FacebookOnLoad = () => {
   FB.init({
     appId: '332308867509793',
     version: 'v16.0',
@@ -13,7 +13,7 @@ const facebookOnLoad = () => {
     autoLogAppEvents: false
   });
 }
-const facebookHandler = () => {
+const FacebookHandler = () => {
   FB.getLoginStatus((response: fb.StatusResponse) => {
     switch (response.status) {
       case 'connected':
@@ -25,7 +25,7 @@ const facebookHandler = () => {
       case 'unknown':
         alert(`You're not logged in facebook yet.`);
         FB.login(function(response){
-          facebookHandler();
+          FacebookHandler();
         });
         break;
       default:
@@ -33,11 +33,13 @@ const facebookHandler = () => {
     }
   });
 };
-const naverHandler = () => {
+const NaverOnLoad = () => {
+}
+const NaverHandler = () => {
   const client_id = 'UAd5kukMklI9ji12Bmhn';
-  const redirectURI = encodeURI('https://ts-sns-login.vercel.app/api/naver');
+  const callback_url = encodeURI('https://ts-sns-login.vercel.app/api/naver');
   const state = 'RANDOM_STATE';
-  location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
+  window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
 };
 const kakaoHandler = () => {
   //Kakaoogin();
@@ -89,7 +91,7 @@ export default function Home() {
 
       <div className="grid mb-32 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <button
-          onClick={facebookHandler}
+          onClick={FacebookHandler}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -104,7 +106,7 @@ export default function Home() {
         </button>
 
         <button
-          onClick={naverHandler}
+          onClick={NaverHandler}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -151,7 +153,11 @@ export default function Home() {
         async
         defer
         src="https://connect.facebook.net/en_US/sdk.js"
-        onLoad={facebookOnLoad}
+        onLoad={FacebookOnLoad}
+      />
+      <Script 
+        src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
+        onLoad={NaverOnLoad}
       />
     </main>
   )
