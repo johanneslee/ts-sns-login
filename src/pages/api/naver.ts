@@ -4,10 +4,7 @@ const client_id = 'UAd5kukMklI9ji12Bmhn';
 const client_secret = 'UnOI4L_sCc';
 const callback_url = encodeURI('https://ts-sns-login.vercel.app/api/naver');
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+const naver = (req: NextApiRequest, res: NextApiResponse) => {
   const code = req.query.code;
   const state = req.query.state;
   let api_url = 'https://nid.naver.com/oauth2.0/token?';
@@ -28,3 +25,4 @@ export default function handler(
   
   console.log(response);
 }
+export default naver;
