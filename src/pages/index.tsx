@@ -41,7 +41,7 @@ const NaverHandler = () => {
   const state = naver_id_login.getUniqState();
 	
   if (naver_id_login.oauthParams) {
-    console.log(naver_id_login);
+    console.log(naver_id_login.oauthParams);
     naver_id_login.get_naver_userprofile(NaverHandlerCallback(naver_id_login));
   } else {
     window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
