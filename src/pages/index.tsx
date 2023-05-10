@@ -33,14 +33,22 @@ const FacebookHandler = () => {
     }
   });
 };
-const NaverOnLoad = () => {
-}
 const NaverHandler = () => {
   const client_id = 'UAd5kukMklI9ji12Bmhn';
   const callback_url = encodeURI('https://ts-sns-login.vercel.app/api/naver');
-  const state = 'RANDOM_STATE';
-  window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
+  
+	const naver_id_login = new window.naver_id_login(client_id, callback_url);
+  const state = naver_id_login.getUniqState();
+	
+  if (naver_id_login.oauthParams) {
+    naver_id_login.get_naver_userprofile(NaverHandlerCallback(naver_id_login));
+  } else {
+    window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
+  }
 };
+const NaverHandlerCallback = (naver_id_login: any) => {
+  alert(naver_id_login.getProfileData('name'));
+}
 const kakaoHandler = () => {
   //Kakaoogin();
 };
@@ -157,7 +165,6 @@ export default function Home() {
       />
       <Script 
         src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-        onLoad={NaverOnLoad}
       />
     </main>
   )
