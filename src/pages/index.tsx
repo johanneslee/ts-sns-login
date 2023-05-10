@@ -39,12 +39,11 @@ const NaverHandler = () => {
   
 	const naver_id_login = new window.naver_id_login(client_id, callback_url);
   const state = naver_id_login.getUniqState();
-	
-  if (naver_id_login.oauthParams) {
-    console.log(naver_id_login.oauthParams);
-    naver_id_login.get_naver_userprofile(NaverHandlerCallback(naver_id_login));
-  } else {
+  
+  if (Object.keys(naver_id_login.oauthParams).length === 0) {
     window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
+  } else {
+    naver_id_login.get_naver_userprofile(NaverHandlerCallback(naver_id_login));
   }
 };
 const NaverHandlerCallback = (naver_id_login: any) => {
