@@ -33,20 +33,21 @@ const FacebookHandler = () => {
     }
   });
 };
+let naver_id_login: any;
 const NaverHandler = () => {
   const client_id = 'UAd5kukMklI9ji12Bmhn';
   const callback_url = encodeURI('https://ts-sns-login.vercel.app');
   
-	const naver_id_login = new window.naver_id_login(client_id, callback_url);
+	naver_id_login = new window.naver_id_login(client_id, callback_url);
   const state = naver_id_login.getUniqState();
   
   if (Object.keys(naver_id_login.oauthParams).length === 0) {
     window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
   } else {
-    naver_id_login.get_naver_userprofile(NaverHandlerCallback(naver_id_login));
+    naver_id_login.get_naver_userprofile(NaverHandlerCallback);
   }
 };
-const NaverHandlerCallback = (naver_id_login: any) => {
+const NaverHandlerCallback = () => {
   alert(naver_id_login.getProfileData('name'));
 }
 const kakaoHandler = () => {
