@@ -35,12 +35,13 @@ const FacebookHandler = () => {
 };
 const NaverHandler = () => {
   const client_id = 'UAd5kukMklI9ji12Bmhn';
-  const callback_url = encodeURI('https://ts-sns-login.vercel.app/api/naver');
+  const callback_url = encodeURI('https://ts-sns-login.vercel.app');
   
 	const naver_id_login = new window.naver_id_login(client_id, callback_url);
   const state = naver_id_login.getUniqState();
 	
   if (naver_id_login.oauthParams) {
+    console.log(naver_id_login);
     naver_id_login.get_naver_userprofile(NaverHandlerCallback(naver_id_login));
   } else {
     window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
