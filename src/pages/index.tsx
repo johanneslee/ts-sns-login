@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 const inter = Inter({ subsets: ['latin'] });
 const FacebookOnLoad = () => {
@@ -34,22 +35,34 @@ const FacebookHandler = () => {
   });
 };
 let naver_id_login: any;
-const NaverHandler = () => {
+const NaverHandler = (req: NextApiRequest, res: NextApiResponse) => {
+  const code = req.query.code;
+  const state = req.query.state;
+
   const client_id = 'UAd5kukMklI9ji12Bmhn';
+  const client_secret = 'UnOI4L_sCc';
   const callback_url = encodeURI('https://ts-sns-login.vercel.app');
   
 	naver_id_login = new window.naver_id_login(client_id, callback_url);
-  const state = naver_id_login.getUniqState();
   
   if (Object.keys(naver_id_login.oauthParams).length === 0) {
-    window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + state;
+    window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + naver_id_login.getUniqState();;
   } else {
-    naver_id_login.get_naver_userprofile(NaverHandlerCallback);
+    const query = `?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${callback_url}&code=${code}&state=${state}`;
+    const response = fetch(`https://nid.naver.com/oauth2.0/token${query}`, {
+      method: "GET",
+      headers: {
+        'X-Naver-Client-Id': client_id,
+        'X-Naver-Client-Secret': client_secret,
+        'Access-Control-Allow-Credentials': 'true',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+        'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+      },
+    }).catch((e) => console.log(e));
+    console.log(response);
   }
 };
-const NaverHandlerCallback = () => {
-  alert(naver_id_login.getProfileData('name'));
-}
 const kakaoHandler = () => {
   //Kakaoogin();
 };
