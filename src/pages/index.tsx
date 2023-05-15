@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const inter = Inter({ subsets: ['latin'] });
 const FacebookOnLoad = () => {
