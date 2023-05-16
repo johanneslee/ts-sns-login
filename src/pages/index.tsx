@@ -7,13 +7,12 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { data: session, status } = useSession();
-  if (session) {
-    console.log(session);
-  } else {
-    console.log('no session');
-  }
   const FacebookHandler = () => {
-    signIn('facebook', { callbackUrl: '/api/auth/facebook'});
+    if (session) {
+      signOut();
+    } else {
+      signIn('facebook', { callbackUrl: '/api/auth/facebook'});
+    }
   };
   const NaverHandler = () => {
     //NaverLogin();
