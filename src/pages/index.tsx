@@ -4,73 +4,27 @@ import Script from 'next/script';
 import { useSession, signIn, signOut } from "next-auth/react"
 
 const inter = Inter({ subsets: ['latin'] });
-const FacebookOnLoad = () => {
-  FB.init({
-    appId: '332308867509793',
-    version: 'v16.0',
-    status: true,
-    cookie: true,
-    xfbml: true,
-    autoLogAppEvents: false
-  });
-}
-const FacebookHandler = () => {
-  FB.getLoginStatus((response: fb.StatusResponse) => {
-    switch (response.status) {
-      case 'connected':
-        alert(`You're already connected to our Website.`);
-        break;
-      case 'not_authorized':
-        alert(`You're logged in facebook but not connected to our Website yet.`);
-        break;
-      case 'unknown':
-        alert(`You're not logged in facebook yet.`);
-        FB.login(function(response){
-          FacebookHandler();
-        });
-        break;
-      default:
-        break;
-    }
-  });
-};
-let naver_id_login: any;
-const NaverHandler = (req: NextApiRequest, res: NextApiResponse) => {
-  const code = req.query.code;
-  const state = req.query.state;
-
-  const client_id = 'UAd5kukMklI9ji12Bmhn';
-  const client_secret = 'UnOI4L_sCc';
-  const callback_url = encodeURI('https://ts-sns-login.vercel.app');
-  
-	naver_id_login = new window.naver_id_login(client_id, callback_url);
-  
-  if (Object.keys(naver_id_login.oauthParams).length === 0) {
-    window.location.href = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + callback_url + '&state=' + naver_id_login.getUniqState();;
-  } else {
-    const query = `?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${callback_url}&code=${code}&state=${state}`;
-    const response = fetch(`https://nid.naver.com/oauth2.0/token${query}`, {
-      method: "GET",
-      headers: {
-        'X-Naver-Client-Id': client_id,
-        'X-Naver-Client-Secret': client_secret,
-        'Access-Control-Allow-Credentials': 'true',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-        'Access-Control-Allow-Headers': 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-      },
-    }).catch((e) => console.log(e));
-    console.log(response);
-  }
-};
-const kakaoHandler = () => {
-  //Kakaoogin();
-};
-const appleHandler = () => {
-  //AppleLogin();
-};
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  if (session) {
+    console.log(session);
+  } else {
+    console.log('no session');
+  }
+  const FacebookHandler = () => {
+    signIn('facebook', { callbackUrl: '/api/auth/facebook'});
+  };
+  const NaverHandler = () => {
+    //NaverLogin();
+  };
+  const kakaoHandler = () => {
+    //KakaoLogin();
+  };
+  const appleHandler = () => {
+    //AppleLogin();
+  };
+
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -175,7 +129,6 @@ export default function Home() {
         async
         defer
         src="https://connect.facebook.net/en_US/sdk.js"
-        onLoad={FacebookOnLoad}
       />
       <Script 
         src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"

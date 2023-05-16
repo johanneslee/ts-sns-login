@@ -23,6 +23,9 @@ export const authOptions = {
       clientSecret: process.env.APPLE_CLIENT_SECRET as string
     }),
   ],
+  callbacks: {
+    
+  }
 }
 
 export default NextAuth(authOptions)
