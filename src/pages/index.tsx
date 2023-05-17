@@ -12,7 +12,7 @@ export default function Home() {
     if (session) {
       signOut();
     } else {
-      signIn('facebook', { callbackUrl: '/api/auth/facebook'});
+      signIn('facebook');
     }
   };
   const NaverHandler = () => {
