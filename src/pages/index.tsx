@@ -8,9 +8,8 @@ const inter = Inter({ subsets: ['latin'] });
 export default function Home() {
   const { data: session, status } = useSession();
   const FacebookHandler = () => {
-    console.log(session.user);
     if (session) {
-      signOut();
+      console.log(session);
     } else {
       signIn('facebook');
     }
