@@ -7,7 +7,6 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { data: session, status } = useSession();
-  console.log(process.env.FACEBOOK_CLIENT_ID);
   const FacebookHandler = () => {
     if (session) {
       signOut();
