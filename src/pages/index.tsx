@@ -7,21 +7,12 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { data: session, status } = useSession();
-  const FacebookHandler = () => {
+  const handler = (provider: string, e: MouseEvent) => {
     if (session) {
       console.log(session);
     } else {
-      signIn('facebook');
+      signIn(provider);
     }
-  };
-  const NaverHandler = () => {
-    //NaverLogin();
-  };
-  const kakaoHandler = () => {
-    //KakaoLogin();
-  };
-  const appleHandler = () => {
-    //AppleLogin();
   };
 
   return (
@@ -66,7 +57,7 @@ export default function Home() {
 
       <div className="grid mb-32 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <button
-          onClick={FacebookHandler}
+          onClick={(e) => {handler('facebook', e)}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -81,7 +72,7 @@ export default function Home() {
         </button>
 
         <button
-          onClick={NaverHandler}
+          onClick={(e) => {handler('naver', e)}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -96,6 +87,7 @@ export default function Home() {
         </button>
 
         <button
+          onClick={(e) => {handler('kakao', e)}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -110,6 +102,7 @@ export default function Home() {
         </button>
 
         <button
+          onClick={(e) => {handler('apple', e)}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
