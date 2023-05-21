@@ -108,17 +108,17 @@ export default function Home() {
         </button>
 
         <button
-          onClick={() => { handler('apple') }}
+          onClick={() => { handler('google') }}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Apple{' '}
+            Google{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Apple Login for the Web with the JavaScript SDK.            
+            Google Login for the Web with the JavaScript SDK.            
           </p>
         </button>
       </div>
