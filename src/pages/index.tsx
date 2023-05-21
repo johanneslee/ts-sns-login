@@ -9,7 +9,12 @@ export default function Home() {
   const { data: session, status } = useSession();
   const handler = (provider: string) => {
     if (session) {
-      console.log(session);
+      if (session.provider === provider) {
+        alert(`you're logged in ${provider}`);
+      } else {
+        alert(`you're logged in other provider. we'll log out you now.`);
+        signOut();
+      }
     } else {
       signIn(provider);
     }
