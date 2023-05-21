@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
     }),
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID as string,
-      clientSecret: '' as string
+      clientSecret: process.env.KAKAO_CLIENT_SECRET as string
     }),
     AppleProvider({
       clientId: process.env.APPLE_CLIENT_ID as string,
