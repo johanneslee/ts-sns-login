@@ -11,6 +11,7 @@ export default function Home() {
     if (session) {
       if (session.provider === provider) {
         alert(`you're logged in ${provider}`);
+        console.log(session);
       } else {
         alert(`you're logged in other provider. we'll log out you now.`);
         signOut();
