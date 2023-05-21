@@ -1,10 +1,12 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook"
 import NaverProvider from "next-auth/providers/naver"
 import KakaoProvider from "next-auth/providers/kakao"
 import AppleProvider from "next-auth/providers/apple"
+import { JWT } from "next-auth/jwt"
+import { Session } from "inspector"
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID as string,
@@ -24,7 +26,18 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    
+    async session ({ session, token }) {
+      if (session.user) {
+        session.provider = token.provider as string;
+      }
+      return session;
+    },
+    async jwt ({ token, user, account }) {
+      if (user) {
+        token.provider = account?.provider;
+      }
+      return token;
+    }
   },
   secret: process.env.NEXTAUTH_SECRET as string
 }

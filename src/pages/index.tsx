@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { data: session, status } = useSession();
-  const handler = (provider: string, e: MouseEvent) => {
+  const handler = (provider: string) => {
     if (session) {
       console.log(session);
     } else {
@@ -57,7 +57,7 @@ export default function Home() {
 
       <div className="grid mb-32 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <button
-          onClick={(e) => {handler('facebook', e)}}
+          onClick={() => { handler('facebook') }}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -72,7 +72,7 @@ export default function Home() {
         </button>
 
         <button
-          onClick={(e) => {handler('naver', e)}}
+          onClick={() => { handler('naver') }}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -87,7 +87,7 @@ export default function Home() {
         </button>
 
         <button
-          onClick={(e) => {handler('kakao', e)}}
+          onClick={() => { handler('kakao') }}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -102,7 +102,7 @@ export default function Home() {
         </button>
 
         <button
-          onClick={(e) => {handler('apple', e)}}
+          onClick={() => { handler('apple') }}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
