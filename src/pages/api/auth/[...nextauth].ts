@@ -2,11 +2,8 @@ import NextAuth, { NextAuthOptions } from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook"
 import NaverProvider from "next-auth/providers/naver"
 import KakaoProvider from "next-auth/providers/kakao"
-<<<<<<< HEAD
-import CredentialsProvider from "next-auth/providers/credentials"
-=======
 import GoogleProvider from "next-auth/providers/google"
->>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
+import CredentialsProvider from "next-auth/providers/credentials"
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -22,7 +19,10 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.KAKAO_CLIENT_ID!,
       clientSecret: process.env.KAKAO_CLIENT_SECRET!
     }),
-<<<<<<< HEAD
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    }),
     CredentialsProvider({
       id : 'telephone',
       name: 'Credentials',
@@ -45,17 +45,12 @@ export const authOptions: NextAuthOptions = {
         // Return null if user data could not be retrieved
         return null
       }
-=======
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
->>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
-    }),
+    })
   ],
   callbacks: {
     async session ({ session, token }) {
       if (session.user) {
-        session.provider = token.provider as string;
+        //session.provider = token.provider as string;
       }
       return session;
     },

@@ -9,6 +9,7 @@ export default function Home() {
   const { data: session, status } = useSession();
   const handler = (provider: string) => {
     if (session) {
+      /*
       if (session.provider === provider) {
         alert(`you're logged in ${provider}`);
         console.log(session);
@@ -16,6 +17,7 @@ export default function Home() {
         alert(`you're logged in other provider. we'll log out you now.`);
         signOut();
       }
+      */
     } else {
       signIn(provider);
     }
@@ -63,11 +65,7 @@ export default function Home() {
 
       <div className="grid mb-32 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <button
-<<<<<<< HEAD
-          onClick={() => {handler('facebook')}}
-=======
           onClick={() => { handler('facebook') }}
->>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -82,11 +80,7 @@ export default function Home() {
         </button>
 
         <button
-<<<<<<< HEAD
-          onClick={() => {handler('naver')}}
-=======
           onClick={() => { handler('naver') }}
->>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -101,11 +95,7 @@ export default function Home() {
         </button>
 
         <button
-<<<<<<< HEAD
-          onClick={() => {handler('kakao')}}
-=======
           onClick={() => { handler('kakao') }}
->>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -120,29 +110,32 @@ export default function Home() {
         </button>
 
         <button
-<<<<<<< HEAD
-          onClick={() => {handler('credentials')}}
-          className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Credencials{' '}
-=======
           onClick={() => { handler('google') }}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
             Google{' '}
->>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-<<<<<<< HEAD
-            Credentials Login for the Web
-=======
-            Google Login for the Web with the JavaScript SDK.            
->>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
+            Google Login for the Web
+          </p>
+        </button>
+
+        <button
+          onClick={() => { handler('credentials') }}
+          className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Credentials{' '}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+          Credentials Login for the Web
           </p>
         </button>
       </div>
