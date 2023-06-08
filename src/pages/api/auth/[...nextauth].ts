@@ -1,23 +1,28 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import FacebookProvider from "next-auth/providers/facebook"
 import NaverProvider from "next-auth/providers/naver"
 import KakaoProvider from "next-auth/providers/kakao"
+<<<<<<< HEAD
 import CredentialsProvider from "next-auth/providers/credentials"
+=======
+import GoogleProvider from "next-auth/providers/google"
+>>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID as string,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET as string
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
     }),
     NaverProvider({
-      clientId: process.env.NAVER_CLIENT_ID as string,
-      clientSecret: process.env.NAVER_CLIENT_SECRET as string
+      clientId: process.env.NAVER_CLIENT_ID!,
+      clientSecret: process.env.NAVER_CLIENT_SECRET!
     }),
     KakaoProvider({
-      clientId: process.env.KAKAO_CLIENT_ID as string,
-      clientSecret: process.env.KAKAO_CLIENT_SECRET as string
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!
     }),
+<<<<<<< HEAD
     CredentialsProvider({
       id : 'telephone',
       name: 'Credentials',
@@ -40,12 +45,28 @@ export const authOptions = {
         // Return null if user data could not be retrieved
         return null
       }
+=======
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+>>>>>>> 2a9a7a7e1fc8220e954ca63afff56d3af805933c
     }),
   ],
   callbacks: {
-    
+    async session ({ session, token }) {
+      if (session.user) {
+        session.provider = token.provider as string;
+      }
+      return session;
+    },
+    async jwt ({ token, user, account }) {
+      if (user) {
+        token.provider = account?.provider;
+      }
+      return token;
+    }
   },
-  secret: process.env.NEXTAUTH_SECRET as string
+  secret: process.env.NEXTAUTH_SECRET!
 }
 
 export default NextAuth(authOptions)
