@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export default function Home() {
   const { data: session, status } = useSession();
-  const handler = (provider: string, e: MouseEvent) => {
+  const handler = (provider: string) => {
     if (session) {
       console.log(session);
     } else {
@@ -57,7 +57,7 @@ export default function Home() {
 
       <div className="grid mb-32 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <button
-          onClick={(e) => {handler('facebook', e)}}
+          onClick={() => {handler('facebook')}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -67,12 +67,12 @@ export default function Home() {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Facebook Login for the Web with the JavaScript SDK.
+            Facebook Login for the Web
           </p>
         </button>
 
         <button
-          onClick={(e) => {handler('naver', e)}}
+          onClick={() => {handler('naver')}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -82,12 +82,12 @@ export default function Home() {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Naver Login for the Web with the JavaScript SDK.
+            Naver Login for the Web
           </p>
         </button>
 
         <button
-          onClick={(e) => {handler('kakao', e)}}
+          onClick={() => {handler('kakao')}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
@@ -97,22 +97,22 @@ export default function Home() {
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Kakao Login for the Web with the JavaScript SDK.            
+            Kakao Login for the Web
           </p>
         </button>
 
         <button
-          onClick={(e) => {handler('apple', e)}}
+          onClick={() => {handler('credentials')}}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Apple{' '}
+            Credencials{' '}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Apple Login for the Web with the JavaScript SDK.            
+            Credentials Login for the Web
           </p>
         </button>
       </div>
