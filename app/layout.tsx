@@ -1,9 +1,10 @@
 'use client';
 
 import './globals.css'
+import { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Ts-Sns-Login'
 }
 
