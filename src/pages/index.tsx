@@ -63,7 +63,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="grid mb-32 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
+      <div className="grid mb-32 text-center lg:mb-0 lg:grid-cols-5 lg:text-left">
         <button
           onClick={() => { handler('facebook') }}
           className="px-5 py-4 text-left transition-colors border border-transparent rounded-lg group hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -139,15 +139,6 @@ export default function Home() {
           </p>
         </button>
       </div>
-
-      <Script
-        async
-        defer
-        src="https://connect.facebook.net/en_US/sdk.js"
-      />
-      <Script 
-        src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-      />
     </main>
   )
 }
