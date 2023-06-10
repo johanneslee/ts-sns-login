@@ -23,10 +23,10 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen lg:flex-row items-center justify-between p-24">
+    <main className="flex flex-col items-center justify-between min-h-screen gap-4 p-24 lg:flex-row">
       <button
         onClick={() => { handler('facebook') }}
-        className="p-4 border-neutral-300 text-left transition-colors border rounded-lg group hover:border-neutral-700 hover:bg-neutral-800/30"
+        className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
           Facebook{' '}
@@ -42,7 +42,7 @@ export default function Home() {
 
       <button
         onClick={() => { handler('naver') }}
-        className="p-4 border-neutral-300 text-left transition-colors border rounded-lg group hover:border-neutral-700 hover:bg-neutral-800/30"
+        className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
           Naver{' '}
@@ -58,7 +58,7 @@ export default function Home() {
 
       <button
         onClick={() => { handler('kakao') }}
-        className="p-4 border-neutral-300 text-left transition-colors border rounded-lg group hover:border-neutral-700 hover:bg-neutral-800/30"
+        className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
           Kakao{' '}
@@ -74,7 +74,7 @@ export default function Home() {
 
       <button
         onClick={() => { handler('google') }}
-        className="p-4 border-neutral-300 text-left transition-colors border rounded-lg group hover:border-neutral-700 hover:bg-neutral-800/30"
+        className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
           Google{' '}
@@ -90,7 +90,7 @@ export default function Home() {
 
       <button
         onClick={() => { handler('credentials') }}
-        className="p-4 border-neutral-300 text-left transition-colors border rounded-lg group hover:border-neutral-700 hover:bg-neutral-800/30"
+        className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
           Credentials{' '}
