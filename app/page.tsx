@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import { Inter } from 'next/font/google';
 import { useSession, signIn, signOut } from "next-auth/react"
+import { useEffect } from 'react';
+import { getUser, getUsers } from '@/firebaseConfig';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,7 +13,7 @@ export default function Home() {
   const handler = (provider: string) => {
     console.log(session);
     if (session) {
-      if (session.user.provider === provider) {
+      if (session.user.provider.toUpperCase() === provider) {
         alert(`you're logged in ${provider}`);
       } else {
         alert(`you're logged in other provider. we'll log out you now.`);
@@ -22,10 +24,15 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    getUser('username', 'password')
+    .then((response) => console.log(response));
+  }, []);
+
   return (
     <main className="flex flex-col items-center justify-between min-h-screen gap-4 p-24 lg:flex-row">
       <button
-        onClick={() => { handler('facebook') }}
+        onClick={() => { handler('FACEBOOK') }}
         className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
@@ -41,7 +48,7 @@ export default function Home() {
       </button>
 
       <button
-        onClick={() => { handler('naver') }}
+        onClick={() => { handler('NAVER') }}
         className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
@@ -57,7 +64,7 @@ export default function Home() {
       </button>
 
       <button
-        onClick={() => { handler('kakao') }}
+        onClick={() => { handler('KAKAO') }}
         className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
@@ -73,7 +80,7 @@ export default function Home() {
       </button>
 
       <button
-        onClick={() => { handler('google') }}
+        onClick={() => { handler('GOOGLE') }}
         className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
@@ -89,7 +96,7 @@ export default function Home() {
       </button>
 
       <button
-        onClick={() => { handler('credentials') }}
+        onClick={() => { handler('CREDENTIALS') }}
         className="w-full p-4 text-left transition-colors border rounded-lg border-neutral-300 group hover:border-neutral-700 hover:bg-neutral-800/30"
       >
         <h2 className="mb-3 text-2xl font-semibold">
