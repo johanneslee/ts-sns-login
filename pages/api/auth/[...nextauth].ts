@@ -27,22 +27,32 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!
     }),
     CredentialsProvider({
-      id : 'username-password-credential',
-      type : 'credentials',
+      id: 'credentials',
+      type: 'credentials',
       name: 'Credentials',
       credentials: {
         username: { label: "Username", type: "text", placeholder: "username" },
         password: { label: "Password", type: "password", placeholder: "password" }
       },
       async authorize(credentials: Record<"username" | "password", string> | undefined): Promise<any> {
-        const user: User = await getUser(credentials?.username as string, credentials?.password as string);
-  
-        // If no error and we have user data, return it
-        if (user) {
-          return user;
+        if (!credentials) {
+          return null;
         }
-        // Return null if user data could not be retrieved
-        return null;
+
+        const username = credentials.username;
+        const password = credentials.password;
+
+        try {
+          const user: User = await getUser(username, password);
+
+          if (!user) {
+            throw 'No User';
+          }
+
+          return user;
+        } catch (e) {
+          return null;
+        }
       }
     })
   ],
